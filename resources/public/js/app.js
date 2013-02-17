@@ -5,11 +5,9 @@ $(document).bind('keydown', 'ctrl+o', function() {
 
     $.getJSON("/api/sheets", function(data) {
         reloadAvailableSheets(data);
-        showSingleInputDialogBox('#openSheetDialog',
+        showDialogBox('#openSheetDialog',
             function() {
                 // post to website in order to download data
-
-
                 alert($("#selectedSheet").prop('value'));
             });
     });
@@ -25,7 +23,7 @@ function reloadAvailableSheets(data) {
     });
 }
 
-function showSingleInputDialogBox(selector, onSuccess) {
+function showDialogBox(selector, onSuccess) {
     $(selector)
         .dialog({
             buttons: {
