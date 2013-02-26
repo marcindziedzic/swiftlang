@@ -1,44 +1,46 @@
 
-// bind function is called twice, repair
-
 $(document).bind('keydown', 'ctrl+o', function() {
 
-    $.getJSON("/api/sheets", function(data) {
-        reloadAvailableSheets(data);
+    $.getJSON("/api/sheets", function(result) {
+        reloadAvailableSheetsList(result);
         showDialogBox('#openSheetDialog',
             function() {
-                // post to website in order to download data
-                alert($("#selectedSheet").prop('value'));
+                loadSheet($("#selectedSheet").prop('value'));
             });
     });
 
     return false;
 });
 
-function reloadAvailableSheets(data) {
+function reloadAvailableSheetsList(list) {
     $("#availableSheets").empty();
 
-    $.each(data, function(k, v) {
+    $.each(list, function(k, v) {
         $("#availableSheets").append('<option>' + v + '</option>')
     });
 }
 
-function showDialogBox(selector, onSuccess) {
-    $(selector)
-        .dialog({
-            buttons: {
-                'OK': onSuccess
-            }
+function loadSheet(name) {
+    $.getJSON("/api/sheet/" + name, function(result) {
+        $("#title").text(name);
+        $("#words").empty();
 
+        $.each(result["words"], function(k, v) {
+            $("#words").append('<p>' + k + " - " + v + '</p>')
         })
-        .keyup(function (e) {
+    });
+}
+
+function showDialogBox(selector, onSuccess) {
+    $(selector).dialog({
+            buttons: { 'OK': onSuccess }
+        }) .keyup(function (e) {
             if (e.keyCode == $.ui.keyCode.ENTER) {
                 $(this).parent().find('button').trigger('click');
             }
         });
 }
 
-// it should be possible to add word to non-existing sheet, the default one (nil) should be use then
 $(document).bind('keydown', 'ctrl+n', function() {
     var w = prompt("Add word:")
     // do query, add word, display it

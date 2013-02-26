@@ -10,6 +10,7 @@
   (GET "/" [] (sl.pages/home))
 
   (GET "/api/sheets" [] (sl.api/get-sheets))
+  (GET "/api/sheet/:name" [name] (sl.api/get-sheet name))
 
   (GET "/api/word/add" [] (sl.api/add-word ""))
 

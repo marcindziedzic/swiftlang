@@ -4,10 +4,21 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1>Welcome in exemplary Clojure WebApp!</h1>
+    <h1>Welcome in Swiftlang!</h1>
 
+    <div id="welcomeMessage">
+        <p>Use ctrl+o to load sheet</p>
+        <p>Use ctrl+n to add word to loaded sheet</p>
+    </div>
 
-    <div id="dialogs" style="visibility: hidden" >
+    <div id="activeSheet">
+        <p>Currently open sheet: <span id="title">NONE</span></p>
+        <div id="words">
+
+        </div>
+    </div>
+
+    <div style="visibility: hidden" >
 
         <div id="openSheetDialog">
             <input id="selectedSheet" type="text" list="availableSheets" placeholder="Open Sheet"/>
