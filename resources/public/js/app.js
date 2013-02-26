@@ -1,5 +1,5 @@
 
-$(document).bind('keydown', 'ctrl+o', function() {
+Mousetrap.bind('ctrl+o', function(e) {
 
     $.getJSON("/api/sheets", function(result) {
         reloadAvailableSheetsList(result);
@@ -33,7 +33,7 @@ function loadSheet(name) {
 
 function showDialogBox(selector, onSuccess) {
     $(selector).dialog({
-            buttons: { 'OK': onSuccess }
+            buttons: { 'GO': onSuccess }
         }) .keyup(function (e) {
             if (e.keyCode == $.ui.keyCode.ENTER) {
                 $(this).parent().find('button').trigger('click');
@@ -41,7 +41,7 @@ function showDialogBox(selector, onSuccess) {
         });
 }
 
-$(document).bind('keydown', 'ctrl+n', function() {
+Mousetrap.bind('ctrl+n', function(e) {
     var w = prompt("Add word:")
     // do query, add word, display it
     return false
