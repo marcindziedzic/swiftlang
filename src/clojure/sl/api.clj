@@ -1,7 +1,6 @@
 (ns sl.api
-  (:require [clojure.data.json :as json]
-            [sl.query-parser :as qp])
-  (:use [sl.in-memory-datastore]))
+  (:use [ring.util.response :only [response]])
+  (:require [sl.query-parser :as qp]))
 
 (def ^:private available-sheets ["Mon" "Tue" "Wed" "Thu" "Fir"])
 
@@ -12,11 +11,11 @@
     (qp/add-word ["canary" "kanarek"])
     (qp/add-word ["home market" "rynek krajowy"])))
 
-(defn add-word [q]
-  "NotYetImplemented")
+(defn add-word [expr]
+  (response (qp/parse-query-string expr)))
 
 (defn get-sheets []
-  (json/write-str available-sheets))
+  (response available-sheets))
 
 (defn get-sheet [name]
-  (json/write-str available-sheet))
+  (response available-sheet))

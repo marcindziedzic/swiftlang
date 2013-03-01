@@ -9,6 +9,7 @@
     <div id="welcomeMessage">
         <p>Use ctrl+o to load sheet</p>
         <p>Use ctrl+n to add word to loaded sheet</p>
+        <p>In order to submit query type "#dog @pies"</p>
     </div>
 
     <div id="activeSheet">
@@ -24,6 +25,10 @@
             <input id="selectedSheet" type="text" list="availableSheets" placeholder="Open Sheet"/>
             <!-- this data list can be moved somewhere else -->
             <datalist id="availableSheets"></datalist>
+        </div>
+
+        <div id="submitQueryDialog">
+            <input id="expression" type="text" />
         </div>
 
     </div>

@@ -2,11 +2,14 @@
   (:use [sl.api :only [get-sheets get-sheet add-word]]
         [expectations]))
 
-(expect "[\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fir\"]"
+(defn successful-ring-response-with-body [body]
+  {:status 200, :headers {}, :body body})
+
+(expect (successful-ring-response-with-body ["Mon" "Tue" "Wed" "Thu" "Fir"])
   (get-sheets))
 
-(expect "{\"words\":{\"home market\":\"rynek krajowy\",\"canary\":\"kanarek\",\"dog\":\"pies\"}}"
+(expect (successful-ring-response-with-body {:words {"home market" "rynek krajowy", "canary" "kanarek", "dog" "pies"}})
   (get-sheet "name"))
 
-(expect "NotYetImplemented"
+(expect (successful-ring-response-with-body ["dog" "pies"])
   (add-word "#dog @pies"))
