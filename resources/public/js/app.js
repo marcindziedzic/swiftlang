@@ -1,9 +1,9 @@
 
-Mousetrap.bind('ctrl+o', function(e) {
+Mousetrap.bind('ctrl+o', function() {
 
     $.getJSON('/api/sheets', function(result) {
         reloadAvailableSheetsList(result);
-        showDialogBox('#openSheetDialog', function() {
+        showModal('#openSheetModal', function() {
                 loadSheet($('#selectedSheet').prop('value'));
             });
     });
@@ -31,8 +31,8 @@ function loadSheet(name) {
     });
 }
 
-Mousetrap.bind('ctrl+n', function(e) {
-    showDialogBox('#submitQueryDialog', function() {
+Mousetrap.bind('ctrl+n', function() {
+    showModal('#submitQueryModal', function() {
         var expr = 'expr=' + $('#expression').prop('value');
         $.post('/api/word/add', expr, function(result){
             appendWord(result[0], result[1]);
@@ -42,16 +42,22 @@ Mousetrap.bind('ctrl+n', function(e) {
     return false
 });
 
-function appendWord(foreign, native) {
-    $('#words').append('<p>' + foreign + ' - ' + native + '</p>')
+function appendWord(foreign, origin) {
+    $('#words').append('<li>' + foreign + ' - ' + origin + '</li>')
 }
 
-function showDialogBox(selector, onSuccess) {
-    $(selector).dialog({
-        buttons: { 'GO': onSuccess }
-    }) .keyup(function (e) {
-            if (e.keyCode == $.ui.keyCode.ENTER) {
-                $(this).parent().find('button').trigger('click');
-            }
-        });
+function showModal(selector, onSuccess) {
+    $(selector).on('shown', function () {
+        $(selector + ' input')
+            .val("")
+            .focus()
+            .keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).parent().find('button').trigger('click');
+                }});
+
+        $(selector + ' button').click(onSuccess);
+    });
+
+    $(selector).modal('show');
 }

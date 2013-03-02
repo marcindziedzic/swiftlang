@@ -4,33 +4,49 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1>Welcome in Swiftlang!</h1>
 
-    <div id="welcomeMessage">
-        <p>Use ctrl+o to load sheet</p>
-        <p>Use ctrl+n to add word to loaded sheet</p>
-        <p>In order to submit query type "#dog @pies"</p>
-    </div>
+    <div class="container-fluid">
 
-    <div id="activeSheet">
-        <p>Currently open sheet: <span id="title">NONE</span></p>
-        <div id="words">
-
+        <div class="page-header">
+            <h1>Welcome in Swiftlang!</h1>
+            <h2><small>The best way to learn languages for busy folks</small></h2>
         </div>
+
+        <dl class="dl-horizontal">
+            <dt>Use ctrl+o</dt>
+            <dd>to load sheet</dd>
+            <dt>Use ctrl+n</dt>
+            <dd>to add word to loaded sheet</dd>
+            <dt>Submit #dog @pies</dt>
+            <dd>in order to add new word to open sheet</dd>
+        </dl>
+
+        <div class="span12">
+            <div>
+                <p>Currently open sheet: <strong id="title">NONE</strong></p>
+            </div>
+            <div class="text-center">
+                <ul id="words" class="unstyled"></ul>
+            </div>
+        </div>
+
     </div>
 
-    <div style="visibility: hidden" >
-
-        <div id="openSheetDialog">
-            <input id="selectedSheet" type="text" list="availableSheets" placeholder="Open Sheet"/>
-            <!-- this data list can be moved somewhere else -->
+    <!-- Modals -->
+    <div id="openSheetModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-body">
+            <input id="selectedSheet" class="input-large" type="text" list="availableSheets" placeholder="Open sheet" />
             <datalist id="availableSheets"></datalist>
+            <button class="btn btn-primary" data-dismiss="modal">GO!</button>
         </div>
-
-        <div id="submitQueryDialog">
-            <input id="expression" type="text" />
-        </div>
-
     </div>
+
+    <div id="submitQueryModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-body">
+            <input id="expression" class="input-large" type="text" placeholder="#dog @pies" />
+            <button class="btn btn-primary" data-dismiss="modal">GO!</button>
+        </div>
+    </div>
+
 </body>
 </html>
