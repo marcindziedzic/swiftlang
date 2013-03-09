@@ -17,6 +17,8 @@
             <dd>to load sheet</dd>
             <dt>Use ctrl+n</dt>
             <dd>to add word to loaded sheet</dd>
+            <dt>Use ctrl+l</dt>
+            <dd>to login to app</dd>
             <dt>Submit #dog @pies</dt>
             <dd>in order to add new word to open sheet</dd>
         </dl>
@@ -45,6 +47,15 @@
         <div class="modal-body">
             <input id="expression" class="input-large" type="text" placeholder="#dog @pies" />
             <button class="btn btn-primary" data-dismiss="modal">GO!</button>
+        </div>
+    </div>
+
+    <div id="loginScreenModal" class="modal hide fade" data-remote="true" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-body">
+            <form action="/login" method="get" data-remote="true">
+                <input type="hidden" name="rp" value="google" />
+                <button type="submit" class="btn btn-primary" >Login with Google!</button>
+            </form>
         </div>
     </div>
 

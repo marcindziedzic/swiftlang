@@ -6,10 +6,13 @@
         [ring.middleware.json :only [wrap-json-response wrap-json-body wrap-json-params]]
         [ring.adapter.jetty :only [run-jetty]])
   (:require [sl.pages]
-            [sl.api]))
+            [sl.api]
+            [sl.auth]))
 
 (defroutes site-routes*
   (GET "/" [] (sl.pages/home))
+  (GET  "/login" [:as request] (sl.auth/authenticate request))
+  (GET  "/openid" [:as rp-response] (sl.auth/validate rp-response))
   (resources "/")
   (not-found "Page not found"))
 

@@ -46,6 +46,11 @@ function appendWord(foreign, origin) {
     $('#words').append('<li>' + foreign + ' - ' + origin + '</li>')
 }
 
+Mousetrap.bind('ctrl+l', function() {
+    $('#loginScreenModal').modal('show');
+    return false;
+});
+
 function showModal(selector, onSuccess) {
     $(selector).on('shown', function () {
         $(selector + ' input')

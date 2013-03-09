@@ -8,7 +8,8 @@
      [ring/ring-json "0.2.0"]
 		 [compojure "1.1.5"]
 		 [enlive "1.0.1"]
-		 [com.taoensso/carmine "1.2.1"]]
+		 [com.taoensso/carmine "1.2.1"]
+     [org.openid4java/openid4java-consumer "0.9.5"]]
   :plugins [[lein-ring "0.7.5"]]
 
   :source-paths ["src/clojure"]
